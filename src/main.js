@@ -1,4 +1,3 @@
-var BIG_FILE = 30 * 1024 * 1024;
 var FILES = 10;
 
 function log(message) {
@@ -102,7 +101,7 @@ window.onload = function() {
    document.getElementById('read-files').onclick = function() {
       window.webkitRequestFileSystem(
          PERSISTENT,
-         BIG_FILE,
+         FILES*10,
          function(fs) {
             log('Filesystem: ' + fs);
             read_files(fs, file_content);
@@ -113,12 +112,12 @@ window.onload = function() {
 
    document.getElementById('restore-files').onclick = function() {
       navigator.webkitPersistentStorage.requestQuota(
-         BIG_FILE * FILES,
+         FILES * 10,
          function(grantedBytes) { log('Granted quota ' + grantedBytes) },
          function(e) { log('Granted quota error : ' + e); });
       window.webkitRequestFileSystem(
          PERSISTENT,
-         BIG_FILE,
+         FILES * 10,
          function(fs) {
             log('Filesystem: ' + fs);
             restore_archive(fs);
@@ -142,7 +141,7 @@ window.onload = function() {
      document.querySelector('#reset').onclick = function() {
         window.close();
       };
-}
+   }
 }
 
 
